@@ -42,7 +42,7 @@ then
   exit 1
 fi
 
-if [ DAY_OF_THE_WEEK -gt 5 ]
+if [ $DAY_OF_THE_WEEK -gt 5 ]
 then
   echo "It's the weekend."
   echo "Blocked!"
