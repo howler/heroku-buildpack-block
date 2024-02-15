@@ -15,11 +15,7 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 LOG_FILE='/tmp/node-build-log.txt'
 
-### Load dependencies
-source ${BP_DIR}/lib/environment.sh
-
 ### Set variables to check
-export_env_dir
 SOURCE_VERSION=${SOURCE_VERSION}
 CURRENT_TIME=$(date +%T)
 # Times are UTC
