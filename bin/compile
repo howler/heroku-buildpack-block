@@ -31,23 +31,28 @@ echo "DAY_OF_THE_WEEK = $DAY_OF_THE_WEEK"
 echo "SOURCE_VERSION = $SOURCE_VERSION"
 echo "WHITE_LISTED_SOURCE_VERSION = $WHITE_LISTED_SOURCE_VERSION"
 
-if [[ "$CURRENT_TIME" < "$MIN_TIME" ]]
+if [[ "$SOURCE_VERSION" == "$WHITE_LISTED_SOURCE_VERSION" ]]
 then
-  echo "CURRENT_TIME < MIN_TIME"
-  echo "Blocked!"
-  exit 1
-fi
+  echo "Current source version is whitelisted"
+else
+  if [[ "$CURRENT_TIME" < "$MIN_TIME" ]]
+  then
+    echo "CURRENT_TIME < MIN_TIME"
+    echo "Blocked!"
+    exit 1
+  fi
 
-if [[ "$CURRENT_TIME" > "$MAX_TIME" ]]
-then
-  echo "CURRENT_TIME > MAX_TIME"
-  echo "Blocked!"
-  exit 1
-fi
+  if [[ "$CURRENT_TIME" > "$MAX_TIME" ]]
+  then
+    echo "CURRENT_TIME > MAX_TIME"
+    echo "Blocked!"
+    exit 1
+  fi
 
-if [ $DAY_OF_THE_WEEK -gt 5 ]
-then
-  echo "It's the weekend."
-  echo "Blocked!"
-  exit 1
+  if [ $DAY_OF_THE_WEEK -gt 5 ]
+  then
+    echo "It's the weekend."
+    echo "Blocked!"
+    exit 1
+  fi
 fi
