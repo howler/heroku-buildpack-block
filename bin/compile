@@ -21,10 +21,12 @@ CURRENT_TIME=$(date +%T)
 # Times are UTC
 MIN_TIME='07:00:00'
 MAX_TIME='08:30:00'
+DAY_OF_THE_WEEK=$(date +%u)
 
 echo "CURRENT_TIME = $CURRENT_TIME"
 echo "MIN_TIME = $MIN_TIME"
 echo "MAX_TIME = $MAX_TIME"
+echo "DAY_OF_THE_WEEK = $DAY_OF_THE_WEEK"
 
 if [[ "$CURRENT_TIME" < "$MIN_TIME" ]]
 then
@@ -36,6 +38,13 @@ fi
 if [[ "$CURRENT_TIME" > "$MAX_TIME" ]]
 then
   echo "CURRENT_TIME > MAX_TIME"
+  echo "Blocked!"
+  exit 1
+fi
+
+if [ DAY_OF_THE_WEEK -gt 5 ]
+then
+  echo "It's the weekend."
   echo "Blocked!"
   exit 1
 fi
