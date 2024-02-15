@@ -18,8 +18,9 @@ LOG_FILE='/tmp/node-build-log.txt'
 ### Set variables to check
 SOURCE_VERSION=${SOURCE_VERSION}
 CURRENT_TIME=$(date +%T)
-MIN_TIME='09:00:00'
-MAX_TIME='10:30:00'
+# Times are UTC
+MIN_TIME='07:00:00'
+MAX_TIME='08:30:00'
 
 echo "CURRENT_TIME = $CURRENT_TIME"
 echo "MIN_TIME = $MIN_TIME"
