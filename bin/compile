@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+### Configure environment
+
+set -o errexit    # always exit on error
+set -o pipefail   # don't ignore exit codes when piping output
+set -o nounset    # fail on unset variables
+unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
+
+### Configure directories
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+LOG_FILE='/tmp/node-build-log.txt'
+
+### Set variables to check
+SOURCE_VERSION=${SOURCE_VERSION}
+CURRENT_TIME=$(date +%T)
+MIN_TIME='09:00:00'
+MAX_TIME='10:30:00'
+
+echo "CURRENT_TIME = $CURRENT_TIME"
+echo "MIN_TIME = $MIN_TIME"
+echo "MAX_TIME = $MAX_TIME"
+
+if [[ "$CURRENT_TIME" < "$MIN_TIME" ]]
+then
+  echo "CURRENT_TIME < MIN_TIME"
+  echo "Blocked!"
+  exit 1
+fi
+
+if [[ "$CURRENT_TIME" > "$MAX_TIME" ]]
+then
+  echo "CURRENT_TIME > MAX_TIME"
+  echo "Blocked!"
+  exit 1
+fi
